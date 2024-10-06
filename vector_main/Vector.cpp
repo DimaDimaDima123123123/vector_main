@@ -182,3 +182,68 @@ void Vector::MergeArray(const int* newArr, int newSize)
     arr = temp;
     size += newSize;
 }
+
+//
+
+Vector& Vector::operator+=(int count)
+{
+    int* temp = new int[size + count];  // новый массив (+размер)
+
+    for (int i = 0; i < size; i++)
+    {
+        temp[i] = arr[i];  // копирка старых элементов
+    }
+
+    for (int i = size; i < size + count; i++)
+    {
+        temp[i] = 0;  // иниц. новых элементов со значеним 0 или другим
+    }
+
+    delete[] arr;    // удаление старого
+    arr = temp;      // присваивание нового
+    size += count;
+
+    return *this;
+}
+
+Vector& Vector::operator-=(int count)
+{
+    if (size < count) return *this;  // размер меньше - возвращаение без изменений
+    int* temp = new int[size - count];  // новый уменш. масив
+
+    for (int i = 0; i < size - count; i++)
+    {
+        temp[i] = arr[i];  // копирка старых эл. кроме последних cout
+    }
+
+    delete[] arr;
+    arr = temp;
+    size -= count;
+
+    return *this;
+}
+
+Vector& Vector::operator*=(int value)
+{
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] *= value;  // умножение каждого объекта на значение
+    }
+
+    return *this;
+}
+
+Vector operator-(int count, const Vector& vec)
+{
+    if (vec.size <= count) return Vector(0);  // если удаление больше или такого же кол-ва эл., сколько есть
+
+    Vector result(vec.size - count);  // новый вектор(-размер)
+
+    for (int i = 0; i < result.size; i++)
+    {
+        result.arr[i] = vec.arr[i + count];  // копирование эл. начиная с каунт
+    }
+
+    return result;
+}
+

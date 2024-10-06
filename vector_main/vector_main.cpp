@@ -27,4 +27,22 @@ int main()
     int arrToAdd[] = { 300, 400, 500 };
     obj1.MergeArray(arrToAdd, 3);
     obj1.Print();
+
+    // 
+
+    // += (добавление 5 элементов)
+    obj1 += 5;
+    obj1.Print();
+
+    // -= (уменьшение размера на 3 элемента)
+    obj1 -= 3;
+    obj1.Print();
+
+    //*= (умножение всех элементов на 2)
+    obj1 *= 2;
+    obj1.Print();
+
+    // 5 - obj (удаление 5 первых элементов)
+    Vector obj2 = 5 - obj1;
+    obj2.Print();
 }
